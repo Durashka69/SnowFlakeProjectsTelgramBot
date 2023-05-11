@@ -10,7 +10,7 @@ from aiogram.types import ContentType
 from apps.projects.models import Project
 
 
-bot = Bot(token=config.API_TOKEN)
+bot = Bot(token=config.TOKEN)
 dp = Dispatcher(bot)
 
 
