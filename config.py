@@ -12,4 +12,4 @@ from django.conf import settings
 
 
 load_dotenv()
-TOKEN = os.getenv("TOKEN")
+API_TOKEN = os.getenv("TOKEN")
