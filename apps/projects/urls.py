@@ -7,7 +7,7 @@ from apps.projects.views import (
     AppealRetrieveUpdateDestroyAPIView,
 )
 
-app_name = 'projects'
+app_name = 'attendance'
 
 urlpatterns = [
     path('projects/', ProjectListCreateAPIView.as_view(), name='project-list-create'),

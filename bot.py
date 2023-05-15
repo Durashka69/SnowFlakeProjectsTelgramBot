@@ -27,29 +27,23 @@ async def start_message(message: types.Message):
     )
 
 
-# Словарь для хранения данных о проекте
 project_data = {}
 
 
-# Обработчик сообщений
 @dp.message_handler(content_types=ContentType.ANY)
 async def create_project(message: types.Message):
     chat_id = message.chat.id
 
-    # Запрашиваем заголовок проекта
     if "title" not in project_data:
         project_data["title"] = message.text
         await bot.send_message(
             chat_id, "Отлично! Теперь отправьте мне описание вашего проекта."
         )
-    # Запрашиваем описание проекта
     elif "description" not in project_data:
         project_data["description"] = message.text
         await bot.send_message(chat_id, "Загрузите изображение вашего проекта.")
-    # Запрашиваем изображение проекта
     elif "image" not in project_data:
         if message.photo:
-            # Сохраняем изображение
             file_id = message.photo[-1].file_id
             file = await bot.get_file(file_id)
             image_url = file.file_path
@@ -60,10 +54,8 @@ async def create_project(message: types.Message):
                 chat_id,
                 "Извините, я не могу обработать это изображение. Пожалуйста, отправьте другое.",
             )
-    # Запрашиваем ссылку на проект
     elif "link" not in project_data:
         project_data["link"] = message.text
-        # Создаем экземпляр модели и сохраняем в базе данных
         project = await sync_to_async(
             Project.objects.create)(
             title=project_data["title"],
@@ -71,13 +63,11 @@ async def create_project(message: types.Message):
             image=project_data["image"],
             link=project_data["link"],
         )
-        # Очищаем словарь project_data
         project_data.clear()
         await bot.send_message(chat_id, "Проект успешно создан!")
     else:
         await bot.send_message(chat_id, "Что-то пошло не так. Попробуйте еще раз.")
 
 
-# Запускаем бота
 if __name__ == "__main__":
     executor.start_polling(dp, skip_updates=True)
