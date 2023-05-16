@@ -42,7 +42,7 @@ env/
 ENV/
 env.bak/
 venv.bak/
-.env
+# .env
 
 .envs/.env.local
 core/settings/local.py

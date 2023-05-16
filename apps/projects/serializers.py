@@ -3,7 +3,7 @@ from rest_framework import serializers
 from apps.projects.models import Appeal, Project
 
 
-class ProjectSerializer(serializers.Serializer):
+class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = (
@@ -15,7 +15,7 @@ class ProjectSerializer(serializers.Serializer):
         )
 
 
-class AppealSerializer(serializers.Serializer):
+class AppealSerializer(serializers.ModelSerializer):
     class Meta:
         model = Appeal
         fields = (
